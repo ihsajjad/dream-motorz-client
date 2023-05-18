@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.nav-item{
+    @apply hover:bg-purple-900 p-3 rounded
+}
