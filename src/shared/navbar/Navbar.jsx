@@ -6,7 +6,7 @@ import { FaBars, FaHome, FaTimes } from "react-icons/fa";
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     return (
-        <div className="flex flex-row items-center justify-center bg-purple-700 text-white md:mt-8 mt-2 p-2 rounded">
+        <div className="flex flex-row items-center justify-center bg-purple-700 text-white h-16">
             <div className="flex-1">
                 <Link to='/' className="btn btn-ghost normal-case text-2xl">
                 DreamMotorz
@@ -20,7 +20,7 @@ const Navbar = () => {
                 }
             </div>
             <div className="flex-none relative">
-                <ul className={`flex md:flex-row flex-col md:items-center bg-purple-700 md:space-x-2 text-xl font-semibold md:static absolute ${open ? '-right-52' : '-right-2 top-4 w-40 p-2 rounded'}`}>
+                <ul className={`flex md:flex-row flex-col md:items-center bg-purple-700 md:space-x-2 md:mr-4 text-xl font-semibold md:static absolute ${open ? '-right-2 top-4 w-40 p-2 rounded' : '-right-52'}`}>
                     <li className="nav-item">
                         <Link to='/' className="flex items-center"><FaHome className="mr-1"/>Home</Link>
                     </li>
