@@ -38,7 +38,11 @@ const Navbar = () => {
                         <Link to='/add-a-toys'>Add A Toy</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to='/blogs'>Blogs</Link></li>
+                        <Link to='/blogs'>Blogs</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/login'>Login</Link>
+                    </li>
                     <li>
                         <Link to='/profile'>
                             <img className="btn-circle avatar" src="https://avatars.githubusercontent.com/u/119999260?s=40&v=4" />
