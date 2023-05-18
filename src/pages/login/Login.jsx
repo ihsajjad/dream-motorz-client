@@ -1,11 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 
 const Login = () => {
-    const {googleSignIn, userLogin} = useContext(AuthContext)
+    const {googleSignIn, userLogin} = useContext(AuthContext);
+    const [error, setError] = useState('');
 
     // handling google login
     const handleGoogleLogin = () => {
@@ -13,12 +14,13 @@ const Login = () => {
         .then(result => {
             console.log(result.user)
         })
-        .catch(error => console.log(error))
+        .catch(error => setError(error.message))
     }
 
     // login with email and password
     const handleLogin = (event) => {
         event.preventDefault();
+        setError('');
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
@@ -29,7 +31,7 @@ const Login = () => {
             const loggedUser = result.user;
             console.log(loggedUser);
         })
-        .catch(error => console.log(error));
+        .catch(error => setError(error.message));
     }
     return (
         <div className="min-h-screen bg-amber-50 w-full py-12 px-3">
@@ -47,7 +49,7 @@ const Login = () => {
                             <span className="label-text">Password</span>
                         </label>
                         <input type="password" name='password' placeholder="Password" className="input input-bordered border-purple-300" />
-                        <p className='text-red-500'>{'error'}</p>
+                        <p className='text-red-500'>{error}</p>
                         <label className="label">
                             <a onClick={'handlePasswordReset'} href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>

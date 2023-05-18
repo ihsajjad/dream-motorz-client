@@ -1,18 +1,33 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
 
 const Register = () => {
+    const [error, setError] = useState('');
     const {createUser} = useContext(AuthContext);
 
     const handleRegister = (event) => {
         event.preventDefault();
+        setError('');
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
         const photo = form.photo.value;
+
+        // Password validation
+        if(password.length < 6){
+            return setError('password should have minimum 6 Characters');
+        } else if(!/^(?=.*[0-9])/.test(password)){
+            return setError('Password should have minimum one Number');
+        } else if(!/(?=.*[A-Z])/.test(password)){
+            return setError("Password should have minimum one Capital letter");
+        }
+
+        /* else if(!/(?=.*[!@#$%^&*])/.test(password)){
+            return setError("Password should have minimum one Special Character");
+        } */
 
         createUser(email, password)
         .then(result => {
@@ -20,7 +35,7 @@ const Register = () => {
             console.log(createdUser);
         })
         .catch(error => {
-            console.log(error.message);
+            setError(error.message);
         })
     }
     return (
@@ -51,7 +66,7 @@ const Register = () => {
                             <span className="label-text">Photo URL</span>
                         </label>
                         <input type="url" name='photo' placeholder="Your Photo URL" className="input input-bordered border-purple-300" />
-                        <p className='text-red-500'>{'error'}</p>
+                        <p className='text-red-500'>{error}</p>
                     </div>
                     <div className="form-control mt-2">
                         <input type="submit" value="Register" className='custom-btn' />
