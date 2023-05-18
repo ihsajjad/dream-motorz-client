@@ -1,14 +1,18 @@
 import { useContext } from 'react';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 
 const Login = () => {
-    // const {googleLogin} = useContext(AuthContext)
+    const {googleSignIn} = useContext(AuthContext)
 
     const handleGoogleLogin = () => {
-
+        googleSignIn()
+        .then(result => {
+            console.log(result.user)
+        })
+        .catch(error => console.log(error))
     }
     return (
         <div className="min-h-screen bg-amber-50 w-full py-12 px-3">
@@ -40,7 +44,7 @@ const Login = () => {
                     <h3>Login with</h3>
                     <hr className='border border-slate-300 my-3 w-3/4 mx-auto' />
                     <div className='flex lg:flex-row flex-col items-center justify-center gap-5 mb-4 '>
-                        <div onClick={'handleGoogleLogin'} className="custom-btn">
+                        <div onClick={handleGoogleLogin} className="custom-btn">
                             <FaGoogle className='text-2xl mr-3'/><span> Google</span>
                         </div>
                     </div>

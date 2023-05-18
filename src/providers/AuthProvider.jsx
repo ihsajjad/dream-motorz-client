@@ -8,12 +8,12 @@ export const AuthContext = createContext();
 const AuthProvider = ({children}) => {
     
     // Sign in with google
-    // const googleProvider = new GoogleAuthProvider();
-    // const googleSignIn = () => {
-    //     return signInWithPopup(auth, googleProvider)
-    // }
+    const googleProvider = new GoogleAuthProvider();
+    const googleSignIn = () => {
+        return signInWithPopup(auth, googleProvider)
+    }
     const authInfo ={
-        // googleSignIn
+        googleSignIn
     }
     return (
         <AuthContext.Provider value={authInfo}>
