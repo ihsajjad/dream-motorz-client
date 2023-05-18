@@ -5,8 +5,9 @@ import { AuthContext } from '../../providers/AuthProvider';
 
 
 const Login = () => {
-    const {googleSignIn} = useContext(AuthContext)
+    const {googleSignIn, userLogin} = useContext(AuthContext)
 
+    // handling google login
     const handleGoogleLogin = () => {
         googleSignIn()
         .then(result => {
@@ -14,9 +15,25 @@ const Login = () => {
         })
         .catch(error => console.log(error))
     }
+
+    // login with email and password
+    // const handleLogin = (event) => {
+    //     event.preventDefault();
+    //     const form = event.target;
+    //     const email = form.email.value;
+    //     const password = form.password.value;
+    //     console.log(email, password);
+
+    //     userLogin(email, password)
+    //     .then(result=> {
+    //         const loggedUser = result.user;
+    //         console.log(loggedUser);
+    //     })
+    //     .catch(error => console.log(error));
+    // }
     return (
         <div className="min-h-screen bg-amber-50 w-full py-12 px-3">
-            <form onSubmit={'handleSignIn'} className="rounded-lg p-5 lg:w-2/5 w-full mx-auto shadow-2xl bg-purple-100 my-10 border-2 border-purple-300">
+            <form onSubmit={'handleLogin'} className="rounded-lg p-5 lg:w-2/5 w-full mx-auto shadow-2xl bg-purple-100 my-10 border-2 border-purple-300">
                 <h2 className='text-3xl font-bold text-center mt-5 text-purple-700 border-b-4 border-purple-700 pb-3 mx-8'>Please Login</h2>
                 <div className="card-body">
                     <div className="form-control">
