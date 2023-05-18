@@ -4,10 +4,28 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 
 const Register = () => {
-    
+    const {createUser} = useContext(AuthContext);
+
+    const handleRegister = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const photo = form.photo.value;
+
+        createUser(email, password)
+        .then(result => {
+            const createdUser = result.user;
+            console.log(createdUser);
+        })
+        .catch(error => {
+            console.log(error.message);
+        })
+    }
     return (
         <div className="min-h-screen bg-amber-50 w-full py-12 px-3">
-            <form onSubmit={'handleRegister'} className="rounded-lg p-5 lg:w-2/5 w-full mx-auto shadow-2xl bg-purple-100 my-10 border-2 border-purple-300">
+            <form onSubmit={handleRegister} className="rounded-lg p-5 lg:w-2/5 w-full mx-auto shadow-2xl bg-purple-100 my-10 border-2 border-purple-300">
                 <h2 className='text-3xl font-bold text-center mt-5 text-purple-700 border-b-4 border-purple-700 pb-3 mx-8'>Please Register</h2>
                 <div className="card-body">
                     <div className="form-control">
