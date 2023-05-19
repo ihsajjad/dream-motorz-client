@@ -16,7 +16,22 @@ const MyToys = () => {
                 setMyToys(data);
             })
     }, [email])
-    console.log(myToys);
+
+    const handleDelete = (id) =>{
+        fetch(`http://localhost:5000/products/${id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.deletedCount > 0){
+                const remaining = myToys.filter(toy => toy._id !== id);
+                setMyToys(remaining);
+            }
+        })
+    }
+
+
     return (
         <div className="overflow-x-auto w-full md:p-4">
             <h3 className="text-3xl font-bold text-purple-700 text-center my-4">My Toys</h3>
@@ -44,7 +59,7 @@ const MyToys = () => {
                             <td>
                                 <div className="flex space-x-2">
                                     <button className="btn btn-circle bg-amber-500 hover:bg-amber-600 border-none text-xl"><FaRegEdit /></button>
-                                    <button className="btn btn-circle bg-red-500 hover:bg-red-600 border-none text-xl"><FaTimes /></button>
+                                    <button onClick={()=> handleDelete(toy._id)} className="btn btn-circle bg-red-500 hover:bg-red-600 border-none text-xl"><FaTimes /></button>
                                 </div>
                             </td>
                         </tr>)
