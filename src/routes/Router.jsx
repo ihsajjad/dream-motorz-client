@@ -5,6 +5,7 @@ import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import NotFound from "../shared/404/NotFound";
 import AddAToy from "../pages/addAToy/AddAToy";
+import PrivetRoute from "./PrivetRoute";
 
 
 const router = createBrowserRouter([
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/add-a-toy',
-                element: <AddAToy />
+                element: <PrivetRoute><AddAToy /></PrivetRoute>
             }
         ]
     }

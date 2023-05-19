@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 
@@ -8,11 +8,16 @@ const Login = () => {
     const {googleSignIn, userLogin} = useContext(AuthContext);
     const [error, setError] = useState('');
 
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname;
+
     // handling google login
     const handleGoogleLogin = () => {
         googleSignIn()
         .then(result => {
             console.log(result.user)
+            navigate(from,{replace : true})
         })
         .catch(error => setError(error.message))
     }
@@ -30,8 +35,13 @@ const Login = () => {
         .then(result=> {
             const loggedUser = result.user;
             console.log(loggedUser);
+            navigate(from,{replace : true})
         })
         .catch(error => setError(error.message));
+    }
+
+    const handlePasswordReset = () => {
+
     }
     return (
         <div className="min-h-screen bg-amber-50 w-full py-12 px-3">
@@ -51,7 +61,7 @@ const Login = () => {
                         <input type="password" name='password' placeholder="Password" className="input input-bordered border-purple-300" />
                         <p className='text-red-500'>{error}</p>
                         <label className="label">
-                            <a onClick={'handlePasswordReset'} href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                            <a onClick={handlePasswordReset} href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>
                     </div>
                     <div className="form-control mt-2">

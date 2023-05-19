@@ -46,13 +46,18 @@ const AddAToy = () => {
             body: JSON.stringify(newToy)
         })
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => {
+            console.log(data);
+            if(data.acknowledged){
+                alert('Toy is added successfully..')
+            }
+        });
     };
 
     return (
         <div className="py-10">
             <form onSubmit={handleSubmit} className="md:w-3/4 mx-auto border-4 border-purple-400 border-dashed p-5 py-10 rounded-lg relative">
-                <h2 className="text-3xl font-bold text-purple-700 bg-white text-center absolute -top-5 md:left-1/3 left-1/4 px-1">Add A New Toy</h2>
+                <h2 className="text-3xl font-bold text-purple-700 bg-white text-center absolute -top-5 md:left-1/3 left-1/4 px-1">Publish A New Toy</h2>
                 <div className="grid md:grid-cols-2 md:gap-5">
                     <label className="custom-label">
                         Picture URL of the toy:
@@ -97,16 +102,20 @@ const AddAToy = () => {
                     <label className="custom-label">
                         Sub-category:
                         <select name="subCategory" id="" className="custom-input">
-                            <option value="car">Car</option>
-                            <option value="excubator">Excubator</option>
-                            <option value="osuk">Osuk</option>
+                            <option value="racingCars">Racing Cars</option>
+                            <option value="constructionVehicles">Construction Vehicles</option>
+                            <option value="sportsCars">Sports Cars</option>
+                            <option value="monsterTrucks">Monster Trucks</option>
+                            <option value="remote-ControlledCars">Remote-Controlled Cars</option>
+                            <option value="classicCars">Classic Cars</option>
+                            <option value="emergencyVehicles">Emergency Vehicles</option>
                         </select>
                     </label>
 
                     <label className="custom-label">
                         Price:
                         <input
-                            type="number"
+                            type="text"
                             name="price"
                             placeholder="$"
                             className="custom-input"
@@ -116,7 +125,7 @@ const AddAToy = () => {
                     <label className="custom-label">
                         Rating:
                         <input
-                            type="number"
+                            type="text"
                             name="rating"
                             placeholder="Rating"
                             className="custom-input"
