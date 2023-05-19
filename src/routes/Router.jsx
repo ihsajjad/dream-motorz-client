@@ -6,6 +6,7 @@ import Register from "../pages/register/Register";
 import NotFound from "../shared/404/NotFound";
 import AddAToy from "../pages/addAToy/AddAToy";
 import PrivetRoute from "./PrivetRoute";
+import About from "../pages/about/About";
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: '/add-a-toy',
                 element: <PrivetRoute><AddAToy /></PrivetRoute>
+            },
+            {
+                path: '/about',
+                element: <About />
             }
         ]
     }
