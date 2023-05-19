@@ -2,16 +2,14 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaHome, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
-import Spinner from "../spinner/Spinner";
+
 
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
-    const { user, loading, logOut } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
-    if(loading){
-        return <Spinner />
-    }
+    
 
     const handleLogOut = () => {
         logOut()
