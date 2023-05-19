@@ -8,6 +8,7 @@ import AddAToy from "../pages/addAToy/AddAToy";
 import PrivetRoute from "./PrivetRoute";
 import About from "../pages/about/About";
 import AllToys from "../pages/allToys/AllToys";
+import ToyDetails from "../pages/allToys/toyDetails/ToyDetails";
 
 
 const router = createBrowserRouter([
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
             {
                 path: '/all-toys',
                 element: <AllToys />
+            },
+            {
+                path: '/all-toys/:id',
+                element: <ToyDetails />,
+                loader: ({params}) => fetch(`https://dream-motorz-server-ihsajjad.vercel.app/products/${params.id}`)
             }
         ]
     }
