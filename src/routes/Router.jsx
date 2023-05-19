@@ -7,6 +7,7 @@ import NotFound from "../shared/404/NotFound";
 import AddAToy from "../pages/addAToy/AddAToy";
 import PrivetRoute from "./PrivetRoute";
 import About from "../pages/about/About";
+import AllToys from "../pages/allToys/AllToys";
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: '/about',
                 element: <About />
+            },
+            {
+                path: '/all-toys',
+                element: <AllToys />
             }
         ]
     }
