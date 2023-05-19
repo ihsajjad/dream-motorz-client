@@ -11,16 +11,30 @@ const AllToys = () => {
             .then(data => setToys(data));
     }, [])
 
-    if(toys.length === 0){
-        return <Spinner />
+    // if(toys.length === 0){
+    //     return <Spinner />
+    // }
+
+    const searchToy = (event) => {
+        const search = event.target.value;
+        console.log(search)
+        fetch(`http://localhost:5000/products?search=${search}`)
+            .then(res => res.json())
+            .then(data => setToys(data));
     }
     return (
         <div className="overflow-x-auto w-full md:p-4">
             <h3 className="text-3xl font-bold text-purple-700 text-center my-4">All Toys</h3>
+
+            <div className="flex items-center my-4">
+            <input onChange={searchToy} type="text" placeholder="Search by toy name" className="input input-bordered input-primary w-full max-w-xs" />
+            </div>
+
             <table className="table table-zebra w-full ">
                 {/* head */}
                 <thead>
                     <tr>
+                        <th>SL</th>
                         <th>Seller</th>
                         <th>Toy Name</th>
                         <th>Sub-category</th>
@@ -30,9 +44,10 @@ const AllToys = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* row 1 */}
+                    {/* row  */}
                     {
-                        toys.map(toy => <tr key={toy._id}>
+                        toys.map((toy, i) => <tr key={toy._id}>
+                            <td>{i + 1}</td>
                             <td>{toy.sellerName}</td>
                             <td>{toy.toyName}</td>
                             <td>{toy.subCategory}</td>

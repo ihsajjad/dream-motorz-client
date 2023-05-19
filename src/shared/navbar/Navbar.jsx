@@ -3,18 +3,11 @@ import { Link } from "react-router-dom";
 import { FaBars, FaHome, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
 
-/**
- * 
- * <div className="tooltip" data-tip="hello">
-  <button className="btn">Hover me</button>
-</div>
- * */ 
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const { user, logOut } = useContext(AuthContext);
 
-    console.log(user);
 
     const handleLogOut = () => {
         logOut()
