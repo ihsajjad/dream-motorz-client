@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Spinner from "../../shared/spinner/Spinner";
 
 
 const AllToys = () => {
     const [toys, setToys] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://dream-motorz-server.vercel.app/products')
             .then(res => res.json())
             .then(data => setToys(data));
     }, [])
 
+    if(toys.length === 0){
+        return <Spinner />
+    }
     return (
         <div className="overflow-x-auto w-full md:p-4">
             <h3 className="text-3xl font-bold text-purple-700 text-center my-4">All Toys</h3>
@@ -40,18 +44,6 @@ const AllToys = () => {
                         </tr>)
                     }
                 </tbody>
-                {/* foot */}
-                <tfoot>
-                    <tr>
-                        <th>Seller</th>
-                        <th>Toy Name</th>
-                        <th>Sub-category</th>
-                        <th>Price</th>
-                        <th>Available Quantity</th>
-                        <th>Details</th>
-                    </tr>
-                </tfoot>
-
             </table>
         </div>
     );

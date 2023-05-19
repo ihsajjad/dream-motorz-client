@@ -1,68 +1,56 @@
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
-import Spinner from "../../shared/spinner/Spinner";
+import { useLoaderData } from "react-router-dom";
 
 
-const AddAToy = () => {
-    const { user, loading } = useContext(AuthContext);
+const UpdateToy = () => {
+    const toy = useLoaderData();
+    
+    const {availableQuantity, photo, price, toyDescription, toyName, rating, _id}=toy;
 
-    if (loading) {
-        return <Spinner />
-    }
-    const { displayName, email } = user;
+    console.log(_id);
+    
 
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault();
         const form = e.target;
         const photo = form.photo.value;
         const toyName = form.toyName.value;
-        const sellerName = form.sellerName.value;
-        const sellerEmail = form.sellerEmail.value;
-        const subCategory = form.subCategory.value;
+        // const sellerName = form.sellerName.value;
+        // const sellerEmail = form.sellerEmail.value;
+        // const subCategory = form.subCategory.value;
         const price = form.price.value;
         const rating = form.rating.value;
         const availableQuantity = form.availableQuantity.value;
         const toyDescription = form.toyDescription.value;
 
-        const newToy = {
-            photo,
-            toyName,
-            sellerName,
-            sellerEmail,
-            subCategory,
-            price,
-            rating,
-            availableQuantity,
-            toyDescription
-        };
+        const updatedToy = {availableQuantity, photo, price, toyDescription, toyName, rating};
 
-        console.log(newToy);
-
-        fetch('https://dream-motorz-server.vercel.app/products',{
-            method: 'POST',
-            headers:{
+        fetch(`https://dream-motorz-server-ihsajjad.vercel.app/products/${_id}`, {
+            method: 'PUT',
+            headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newToy)
+            body: JSON.stringify(updatedToy)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.acknowledged){
-                alert('Toy is added successfully..')
-            }
-        });
-    };
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                // if(data.deletedCount > 0){
+                //     const remaining = myToys.filter(toy => toy._id !== id);
+                //     setMyToys(remaining);
+                // }
+            })
+    }
 
     return (
         <div className="py-10">
-            <form onSubmit={handleSubmit} className="md:w-3/4 mx-auto border-4 border-purple-400 border-dashed p-5 py-10 rounded-lg relative">
-                <h2 className="text-3xl font-bold text-purple-700 bg-white text-center absolute -top-5 md:left-1/3 left-1/4 px-1">Publish A New Toy</h2>
+            <form onSubmit={handleUpdate} className="md:w-3/4 mx-auto border-4 border-purple-400 border-dashed p-5 rounded-lg">
+                <h2 className="text-3xl font-bold text-purple-700 bg-white text-center mb-5">Update Toy</h2>
                 <div className="grid md:grid-cols-2 md:gap-5">
                     <label className="custom-label">
                         Picture URL of the toy:
                         <input
                             type="url"
+                            defaultValue={photo}
                             name="photo"
                             placeholder="Photo URL"
                             className="custom-input"
@@ -73,28 +61,9 @@ const AddAToy = () => {
                         Toy&apos;s Name:
                         <input
                             type="text"
+                            defaultValue={toyName}
                             name="toyName"
                             placeholder="Toy's Name"
-                            className="custom-input"
-                        />
-                    </label>
-
-                    <label className="custom-label">
-                        Seller Name:
-                        <input
-                            type="text"
-                            name="sellerName"
-                            defaultValue={displayName}
-                            className="custom-input"
-                        />
-                    </label>
-
-                    <label className="custom-label">
-                        Seller Email:
-                        <input
-                            type="email"
-                            name="sellerEmail"
-                            defaultValue={email}
                             className="custom-input"
                         />
                     </label>
@@ -116,6 +85,7 @@ const AddAToy = () => {
                         Price:
                         <input
                             type="text"
+                            defaultValue={price}
                             name="price"
                             placeholder="$"
                             className="custom-input"
@@ -126,6 +96,7 @@ const AddAToy = () => {
                         Rating:
                         <input
                             type="text"
+                            defaultValue={rating}
                             name="rating"
                             placeholder="Rating"
                             className="custom-input"
@@ -137,6 +108,7 @@ const AddAToy = () => {
                         Available Quantity:
                         <input
                             type="number"
+                            defaultValue={availableQuantity}
                             name="availableQuantity"
                             placeholder="Available Quantity"
                             className="custom-input"
@@ -149,6 +121,7 @@ const AddAToy = () => {
                     <textarea
                         name="toyDescription"
                         className="custom-input"
+                        defaultValue={toyDescription}
                         placeholder="Write something about your toy..."
                     ></textarea>
                 </label>
@@ -157,7 +130,7 @@ const AddAToy = () => {
                     <input
                         type="submit"
                         className="custom-btn"
-                        value="Submit"
+                        value="Update"
                     />
                 </div>
             </form>
@@ -165,4 +138,4 @@ const AddAToy = () => {
     );
 };
 
-export default AddAToy;
+export default UpdateToy;

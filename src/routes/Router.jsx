@@ -10,6 +10,7 @@ import About from "../pages/about/About";
 import AllToys from "../pages/allToys/AllToys";
 import ToyDetails from "../pages/allToys/toyDetails/ToyDetails";
 import MyToys from "../pages/myToys/MyToys";
+import UpdateToy from "../pages/myToys/updateToy/UpdateToy";
 
 
 const router = createBrowserRouter([
@@ -45,11 +46,16 @@ const router = createBrowserRouter([
             {
                 path: '/all-toys/:id',
                 element: <PrivetRoute><ToyDetails /></PrivetRoute>,
-                loader: ({params}) => fetch(`https://dream-motorz-server-ihsajjad.vercel.app/products/${params.id}`)
+                loader: ({params}) => fetch(`https://dream-motorz-server.vercel.app/products/${params.id}`)
             },
             {
                 path: '/my-toys',
                 element: <PrivetRoute><MyToys /></PrivetRoute>
+            },
+            {
+                path: '/update-toy/:id',
+                element: <UpdateToy />,
+                loader: ({params}) => fetch(`https://dream-motorz-server.vercel.app/products/${params.id}`)
             }
         ]
     }

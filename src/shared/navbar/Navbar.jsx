@@ -3,13 +3,18 @@ import { Link } from "react-router-dom";
 import { FaBars, FaHome, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
 
-
+/**
+ * 
+ * <div className="tooltip" data-tip="hello">
+  <button className="btn">Hover me</button>
+</div>
+ * */ 
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const { user, logOut } = useContext(AuthContext);
 
-    
+    console.log(user);
 
     const handleLogOut = () => {
         logOut()
@@ -60,8 +65,8 @@ const Navbar = () => {
                                     <button>Log Out</button>
                                 </li>
                                 <li>
-                                    <Link to='/profile'>
-                                        <img className="btn-circle avatar" src="https://avatars.githubusercontent.com/u/119999260?s=40&v=4" />
+                                    <Link to='/profile'  className="tooltip tooltip-bottom" data-tip={user.displayName}>
+                                        <img className="btn-circle avatar" src={user.photoURL} />
                                     </Link>
                                 </li>
                             </>
