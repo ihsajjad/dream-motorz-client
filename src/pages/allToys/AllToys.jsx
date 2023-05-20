@@ -18,7 +18,7 @@ const AllToys = () => {
     const searchToy = (event) => {
         const search = event.target.value;
         console.log(search)
-        fetch(`http://localhost:5000/products?search=${search}`)
+        fetch(`https://dream-motorz-server-ihsajjad.vercel.app/products?search=${search}`)
             .then(res => res.json())
             .then(data => setToys(data));
     }
