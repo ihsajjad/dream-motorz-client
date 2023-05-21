@@ -1,6 +1,8 @@
+import useTitle from "../../hooks/useTitle";
 
 
 const About = () => {
+    useTitle('DMotorz || About');
     return (
         <div className='md:m-12 m-2 md:p-8 p-2 space-y-4 border-2 border-purple-300 rounded-lg'>
             <h2 className='font-bold text-3xl text-center text-purple-700 pb-3 border-b-2 border-purple-700'>About DreamMotorz</h2>

@@ -2,11 +2,17 @@ import { useContext, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import useTitle from '../../hooks/useTitle';
+import { ToastContext } from '../../shared/toast/ToastProvider';
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
     const {googleSignIn, userLogin} = useContext(AuthContext);
+    const {handleToast} = useContext(ToastContext);
     const [error, setError] = useState('');
+
+    useTitle('Login');
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -16,7 +22,14 @@ const Login = () => {
     const handleGoogleLogin = () => {
         googleSignIn()
         .then(result => {
-            console.log(result.user)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Login Successfull',
+                showConfirmButton: false,
+                timer: 1500
+              })
+
             navigate(from,{replace : true})
         })
         .catch(error => setError(error.message))

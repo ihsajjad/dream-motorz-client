@@ -1,14 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import MyToy from "./MyToy";
+import useTitle from "../../hooks/useTitle";
+import { ToastContext } from "../../shared/toast/ToastProvider";
+import Swal from "sweetalert2";
 
 
 const MyToys = () => {
     const [myToys, setMyToys] = useState([]);
+    const { handleToast } = useContext(ToastContext);
 
     const { user } = useContext(AuthContext);
     const { email } = user;
-    console.log(email)
+
+    useTitle('My Toys');
+
+
     useEffect(() => {
         fetch(`https://dream-motorz-server.vercel.app/toys?email=${email}`)
             .then(res => res.json())
@@ -18,20 +25,35 @@ const MyToys = () => {
     }, [email])
 
     const handleDelete = (id) => {
-        const asking = confirm('Are you sure to delete?');
-        if (asking) {
-            fetch(`https://dream-motorz-server.vercel.app/products/${id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    if (data.deletedCount > 0) {
-                        const remaining = myToys.filter(toy => toy._id !== id);
-                        setMyToys(remaining);
-                    }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`https://dream-motorz-server.vercel.app/products/${id}`, {
+                    method: 'DELETE'
                 })
-        }
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            const remaining = myToys.filter(toy => toy._id !== id);
+                            setMyToys(remaining);
+                        }
+                    })
+
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
 
     }
 

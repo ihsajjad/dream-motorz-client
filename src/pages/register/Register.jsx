@@ -1,10 +1,14 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 
 
 const Register = () => {
     const [error, setError] = useState('');
+    
+    useTitle('DMotorz || Register');
+
     const {createUser, updateNameAndPhoto} = useContext(AuthContext);
 
     const handleRegister = (event) => {

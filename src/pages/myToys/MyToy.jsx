@@ -1,8 +1,12 @@
 import { FaRegEdit, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const MyToy = ({ toy, handleDelete }) => {
     const { _id, sellerName, toyName, subCategory, price, availableQuantity } = toy;
+    
+    useTitle(toyName);
+
     return (
         <tr>
             <td>{sellerName}</td>

@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Spinner from "../../shared/spinner/Spinner";
+import useTitle from "../../hooks/useTitle";
 
 
 const AddAToy = () => {
     const { user, loading } = useContext(AuthContext);
+    useTitle('Add A Toy');
 
     if (loading) {
         return <Spinner />
@@ -102,13 +104,20 @@ const AddAToy = () => {
                     <label className="custom-label">
                         Sub-category:
                         <select name="subCategory" id="" className="custom-input">
-                            <option value="racingCars">Racing Cars</option>
-                            <option value="constructionVehicles">Construction Vehicles</option>
                             <option value="sportsCars">Sports Cars</option>
-                            <option value="monsterTrucks">Monster Trucks</option>
-                            <option value="remote-ControlledCars">Remote-Controlled Cars</option>
                             <option value="classicCars">Classic Cars</option>
-                            <option value="emergencyVehicles">Emergency Vehicles</option>
+                            <option value="remote-ControlledCars">Remote-Controlled Cars</option>
+                            <option value="mightyExcavator">Mighty Excavator</option>
+                            <option value="Turbo Bulldozer">turboBulldozer</option>
+                            <option value="roadRollerTitan">Road Roller Titan</option>
+                            <option value="dumpTruckHero">Dump Truck Hero</option>
+                            <option value="loaderMaster">Loader Master</option>
+                            <option value="thunderHauler">Thunder Hauler</option>
+                            <option value="blazeRunner">Blaze Runner</option>
+                            <option value="titanTrailblazer">Titan Trailblazer</option>
+                            <option value="megaMover">Mega Mover</option>
+                            <option value="turboTowingTruck">Turbo Towing Truck</option>
+                            <option value="trailKing">Trail King</option>
                         </select>
                     </label>
 

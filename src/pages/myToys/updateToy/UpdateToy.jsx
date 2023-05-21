@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const UpdateToy = () => {
@@ -14,17 +15,15 @@ const UpdateToy = () => {
         const form = e.target;
         const photo = form.photo.value;
         const toyName = form.toyName.value;
-        // const sellerName = form.sellerName.value;
-        // const sellerEmail = form.sellerEmail.value;
-        // const subCategory = form.subCategory.value;
+        const subCategory = form.subCategory.value;
         const price = form.price.value;
         const rating = form.rating.value;
         const availableQuantity = form.availableQuantity.value;
         const toyDescription = form.toyDescription.value;
 
-        const updatedToy = {availableQuantity, photo, price, toyDescription, toyName, rating};
+        const updatedToy = {availableQuantity, photo, price, toyDescription, toyName, rating, subCategory};
 
-        fetch(`https://dream-motorz-server-ihsajjad.vercel.app/products/${_id}`, {
+        fetch(`https://dream-motorz-server.vercel.app/products/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -34,10 +33,15 @@ const UpdateToy = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                // if(data.deletedCount > 0){
-                //     const remaining = myToys.filter(toy => toy._id !== id);
-                //     setMyToys(remaining);
-                // }
+                if(data.modifiedCount > 0){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Updated Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                }
             })
     }
 
@@ -71,13 +75,20 @@ const UpdateToy = () => {
                     <label className="custom-label">
                         Sub-category:
                         <select name="subCategory" id="" className="custom-input">
-                            <option value="racingCars">Racing Cars</option>
-                            <option value="constructionVehicles">Construction Vehicles</option>
                             <option value="sportsCars">Sports Cars</option>
-                            <option value="monsterTrucks">Monster Trucks</option>
-                            <option value="remote-ControlledCars">Remote-Controlled Cars</option>
                             <option value="classicCars">Classic Cars</option>
-                            <option value="emergencyVehicles">Emergency Vehicles</option>
+                            <option value="remote-ControlledCars">Remote-Controlled Cars</option>
+                            <option value="mightyExcavator">Mighty Excavator</option>
+                            <option value="turboBulldozer">Turbo Bulldozer</option>
+                            <option value="roadRollerTitan">Road Roller Titan</option>
+                            <option value="dumpTruckHero">Dump Truck Hero</option>
+                            <option value="loaderMaster">Loader Master</option>
+                            <option value="thunderHauler">Thunder Hauler</option>
+                            <option value="blazeRunner">Blaze Runner</option>
+                            <option value="titanTrailblazer">Titan Trailblazer</option>
+                            <option value="megaMover">Mega Mover</option>
+                            <option value="turboTowingTruck">Turbo Towing Truck</option>
+                            <option value="trailKing">Trail King</option>
                         </select>
                     </label>
 

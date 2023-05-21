@@ -1,9 +1,10 @@
 import { Link, useRouteError } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 
 const NotFound = () => {
     const error = useRouteError();
-    console.log(error.error.message);
+    useTitle('Not Found')
     return (
         <div className="min-h-screen flex items-center justify-center text-center bg-black text-amber-300">
             <div>

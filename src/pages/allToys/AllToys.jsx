@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "../../shared/spinner/Spinner";
+import useTitle from "../../hooks/useTitle";
 
 
 const AllToys = () => {
     const [toys, setToys] = useState([]);
+    useTitle('All Toys');
+    
     useEffect(() => {
         fetch('https://dream-motorz-server.vercel.app/products')
             .then(res => res.json())
             .then(data => setToys(data));
     }, [])
 
-    // if(toys.length === 0){
-    //     return <Spinner />
-    // }
+    
 
     const searchToy = (event) => {
         const search = event.target.value;
